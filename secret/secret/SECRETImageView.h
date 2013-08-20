@@ -1,5 +1,5 @@
 //
-//  SECRETViewController.h
+//  SECRETImageView.h
 //  secret
 //
 //  Created by Joseph McArthur Gill on 8/19/13.
@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SECRETViewController : UIViewController
-
-- (IBAction)handleLike:(UIButton *)sender;
-
+@interface SECRETImageView : UIView
+-(void)handleSwipeFromLeft;
+-(void)handleSwipeFromRight;
 @end

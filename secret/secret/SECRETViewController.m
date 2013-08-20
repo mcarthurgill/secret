@@ -7,23 +7,42 @@
 //
 
 #import "SECRETViewController.h"
+#import "SECRETImageView.h"
 
 @interface SECRETViewController ()
+@property (weak, nonatomic) IBOutlet SECRETImageView *secretImageView;
+@property (weak, nonatomic) IBOutlet UILabel *secretLabel;
 
 @end
 
 @implementation SECRETViewController
+@synthesize secretImageView = _secretImageView;
+@synthesize secretLabel = _secretLabel;
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
+-(void)viewDidLoad {
+    self.secretLabel.textAlignment = NSTextAlignmentCenter;
+    self.secretLabel.textColor = [UIColor whiteColor];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)setSecretImageView:(SECRETImageView *)secretImageView {
+    _secretImageView = secretImageView;
+    UISwipeGestureRecognizer *recognizer;
+
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self.secretImageView action:@selector(handleSwipeFromRight)];
+    recognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.secretImageView addGestureRecognizer:recognizer];
+
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self.secretImageView action:@selector(handleSwipeFromLeft)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [self.secretImageView addGestureRecognizer:recognizer];
 }
 
+- (IBAction)handleLike:(UIButton *)sender {
+    if ([sender.currentTitle isEqualToString:@"Like"] ) {
+        [self.secretImageView handleSwipeFromRight];
+    }else {
+        [self.secretImageView handleSwipeFromLeft];
+    }
+}
 @end
